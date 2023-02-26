@@ -1,4 +1,4 @@
-
+"""Dynaconf configuration."""
 from dynaconf import Dynaconf
 
 settings = Dynaconf(
