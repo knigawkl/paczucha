@@ -24,3 +24,8 @@ class Telegram(Notifier):
             requests.post(self.url + f'&text={msg}')
         except requests.exceptions.RequestException as e:
             logging.error(e)
+
+    def get_updates(self):
+        url = f'https://api.telegram.org/bot{self.token}/getUpdates'
+        resp = requests.get(url)
+        logging.info(resp.json())
