@@ -1,2 +1,3 @@
-tgtg = {}
-telegram = {chat_id=-864184608}
+package_names = [ "test" ]
+telegram = {chat_id=-864184608, dev_chat_id=1563082916}
+location = {}

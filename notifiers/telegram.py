@@ -1,6 +1,7 @@
 """Telegram client."""
+import logging
 
-from notifiers.base import Notifier
+from notifiers.notifier import Notifier
 
 import requests
 
@@ -16,7 +17,10 @@ class Telegram(Notifier):
         """
         self.token = token
         self.chat_id = chat_id
-        self.url = f"https://api.telegram.org/bot{self.token}/sendMessage?chat_id={self.chat_id}&text="
+        self.url = f"https://api.telegram.org/bot{self.token}/sendMessage?chat_id={self.chat_id}%parse_mode=html"
 
     def notify(self, msg: str) -> None:
-        requests.get(self.url + msg)
+        try:
+            requests.post(self.url + f'&text={msg}')
+        except requests.exceptions.RequestException as e:
+            logging.error(e)

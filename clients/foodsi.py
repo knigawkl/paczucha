@@ -1,4 +1,7 @@
-from clients.base import Client
+from typing import Optional, List
+
+from clients.client import Client
 
 class Foodsi(Client):
-    pass
+    def scan(self, package_names: Optional[List[str]] = None):
+        pass
