@@ -29,8 +29,8 @@ class TGTG(Client, TgtgClient):
     def process_items(self, items: Optional[List[Dict]]):
         for item in items:
             items_available = item.get('items_available')
-            # if not items_available:
-            #     continue
+            if not items_available:
+                continue
             display_name = item.get('display_name')
             msg = f'{display_name}: {items_available}'
             self.notify(msg.replace('&', 'i'))
