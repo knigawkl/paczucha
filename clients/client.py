@@ -26,7 +26,7 @@ class Client(ABC):
     def _form_msg(cls, display_name: str, items_available: int, pickup_interval: str):
         return f'{display_name}\n' \
                f'Available: {items_available}\n' \
-               f'Pickup time: {pickup_interval}' \
+               f'Pickup time: {pickup_interval}\n' \
                f'Source: {cls.__name__}'
 
     def _del_msg(self, item_id):
