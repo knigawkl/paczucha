@@ -1,3 +1,3 @@
 package_names = [ "test" ]
 telegram = {chat_id=-1001354632445, dev_chat_id=1563082916}
-location = {latitude=52.279450, longitude=20.936990, radius=5}
+location = {latitude=52.279450, longitude=20.936990, radius=5000}

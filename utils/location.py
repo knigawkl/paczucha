@@ -8,7 +8,7 @@ class Location:
     Attributes:
         latitude: You know latitude from geography lessons.
         longitude: You know longitude from geography lessons.
-        radius: Location radius in kilometers.
+        radius: Location radius in meters.
 
     """
     latitude: float
