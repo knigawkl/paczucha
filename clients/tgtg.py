@@ -1,40 +1,68 @@
-from typing import List, Dict, Optional
+from typing import List, Dict
+from datetime import datetime
 
 from tgtg import TgtgClient
 
 from clients.client import Client
-from notifiers.notifier import Notifier
-from utils.location import Location
+from notifiers.telegram import Telegram
+from utils.utils import shift_timezone
 
 
 class TGTG(Client, TgtgClient):
 
-    def __init__(self, access_token: str, refresh_token: str, user_id: str, cookie: str,
-                 notifiers: List[Notifier], location: Optional[Location] = None):
+    def __init__(self, access_token: str, refresh_token: str, user_id: str, cookie: str, notifier: Telegram,
+                 verbose: bool = False):
         self.tgtg = TgtgClient(
             access_token=access_token,
             refresh_token=refresh_token,
             user_id=user_id,
             cookie=cookie
         )
-        self.location = location
-        self.notifiers = notifiers
+        self.notifier = notifier
+        self.msg_cache: Dict[str, int] = {}
+        self.verbose = verbose
 
-    def get_items(self) -> Optional[List[Dict]]:
+    def get_fav_items(self) -> List[Dict]:
         try:
             return self.tgtg.get_items(favorites_only=True)
         except Exception as e:
-            return None
+            return []
 
-    def process_items(self, items: Optional[List[Dict]]):
+    def _process_items(self, items: List[Dict]):
         for item in items:
+            item_id = item.get('item', {}).get('item_id')
+            self._del_msg(item_id)
             items_available = item.get('items_available')
-            if not items_available:
+            if not items_available and not self.verbose:
                 continue
-            display_name = item.get('display_name')
-            msg = f'{display_name}: {items_available}'
-            self.notify(msg.replace('&', 'i'))
+            display_name = item.get('display_name').replace('&', 'i')
+            pickup_interval = self._format_pickup_interval(item.get('pickup_interval'))
+            msg = self._form_msg(display_name, items_available, pickup_interval)
+            msg_id = self.notifier.notify(msg)
+            self.msg_cache[item_id] = msg_id
 
-    def scan(self, package_names: Optional[List[str]] = None):
-        items = self.get_items()
-        self.process_items(items)
+    def _del_msg(self, item_id):
+        if item_id in self.msg_cache:
+            self.notifier.delete(self.msg_cache.get(item_id))
+            self.msg_cache.pop(item_id)
+
+    @staticmethod
+    def _form_msg(display_name: str, items_available: int, pickup_interval: str):
+        return f'{display_name}\n' \
+               f'Available: {items_available}\n' \
+               f'Pickup time: {pickup_interval}'
+
+    @staticmethod
+    def _format_pickup_interval(pickup_interval: Dict[str, str]):
+        iso_format = '%Y-%m-%dT%H:%M:%SZ'
+        start, end = pickup_interval.get('start'), pickup_interval.get('end')
+        start, end = datetime.strptime(start, iso_format), datetime.strptime(end, iso_format)
+        start, end = shift_timezone(start), shift_timezone(end)
+        day = start.strftime('%d.%m')
+        time_start = start.strftime('%H:%M')
+        time_end = end.strftime('%H:%M')
+        return f'{day} {time_start}-{time_end}'
+
+    def scan(self):
+        items = self.get_fav_items()
+        self._process_items(items)

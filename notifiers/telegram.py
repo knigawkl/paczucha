@@ -1,12 +1,10 @@
 """Telegram client."""
 import logging
 
-from notifiers.notifier import Notifier
-
 import requests
 
 
-class Telegram(Notifier):
+class Telegram:
     def __init__(self, token: str, chat_id: int) -> None:
         """
 
@@ -15,17 +13,40 @@ class Telegram(Notifier):
              chat_id:
 
         """
-        self.token = token
         self.chat_id = chat_id
-        self.url = f"https://api.telegram.org/bot{self.token}/sendMessage?chat_id={self.chat_id}%parse_mode=html"
+        self.url = f"https://api.telegram.org/bot{token}/"
 
-    def notify(self, msg: str) -> None:
+    def notify(self, msg: str) -> int:
+        """Notify via Telegram.
+
+        Args:
+            msg: The message to be sent.
+
+        Returns:
+            Identifier of the message sent.
+
+        """
+        url = f'{self.url}sendMessage?chat_id={self.chat_id}%parse_mode=html&text={msg}'
         try:
-            requests.post(self.url + f'&text={msg}')
+            resp = requests.post(url).json()
+            return resp['result']['message_id']
         except requests.exceptions.RequestException as e:
             logging.error(e)
 
-    def get_updates(self):
-        url = f'https://api.telegram.org/bot{self.token}/getUpdates'
+    def delete(self, msg_id: int) -> None:
+        """Delete a Telegram message.
+
+        Args:
+            msg_id: Telegram message identifier.
+
+        """
+        url = f'{self.url}deleteMessage?chat_id={self.chat_id}&message_id={msg_id}'
+        try:
+            requests.post(url)
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
+
+    def _get_updates(self):
+        url = f'{self.url}getUpdates'
         resp = requests.get(url)
         logging.info(resp.json())
