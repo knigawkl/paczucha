@@ -51,7 +51,7 @@ class Foodsi(Client):
                 "lng": self.location.longitude,
                 "range": self.location.radius
             },
-            "hide_unavailable": True,
+            "hide_unavailable": not self.verbose,
         }
 
     def _get_items(self) -> List[Dict]:
