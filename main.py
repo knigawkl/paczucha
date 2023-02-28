@@ -33,9 +33,11 @@ if __name__ == '__main__':
         verbose=True
     )
     foodsi = Foodsi(
+        location=location,
         notifier=tele
     )
     dev_foodsi = Foodsi(
+        location=location,
         notifier=dev_tele,
         verbose=True
     )
