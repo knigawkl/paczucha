@@ -10,6 +10,10 @@ class Client(ABC):
     msg_cache: Dict[str, int]
     notifier: Telegram
 
+    def __del__(self):
+        for msg_id in self.msg_cache.values():
+            self.notifier.delete(msg_id)
+
     @abstractmethod
     def _get_items(self) -> List[Dict]:
         pass
@@ -27,7 +31,8 @@ class Client(ABC):
 
     def _del_msg(self, item_id):
         if item_id in self.msg_cache:
-            self.notifier.delete(self.msg_cache.get(item_id))
+            msg_id = self.msg_cache.get(item_id)
+            self.notifier.delete(msg_id)
             self.msg_cache.pop(item_id)
 
     def scan(self):
