@@ -1,5 +1,6 @@
 import json
 from typing import List, Dict
+from datetime import datetime
 
 import requests
 
@@ -29,9 +30,10 @@ class Foodsi(Client):
 
     @staticmethod
     def _get_pickup_interval(item: Dict):
+        iso_format = '%Y-%m-%dT%H:%M:%SZ'
         collection_day = item.get('package_day', {}).get('collection_day', {})
         start, end = collection_day.get('opened_at'), collection_day.get('closed_at')
-        raise Exception(start, end)
+        start, end = datetime.strptime(start, iso_format), datetime.strptime(end, iso_format)
         day = start.strftime('%d.%m')
         time_start = start.strftime('%H:%M')
         time_end = end.strftime('%H:%M')
