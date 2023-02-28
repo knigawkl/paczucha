@@ -21,7 +21,7 @@ class Client(ABC):
 
     @staticmethod
     @abstractmethod
-    def _get_item_id(item: Dict):
+    def _get_id(item: Dict):
         pass
 
     @staticmethod
@@ -41,7 +41,7 @@ class Client(ABC):
 
     def _process_items(self, items: List[Dict]):
         for item in items:
-            item_id = self._get_item_id(item)
+            item_id = self._get_id(item)
             self._del_msg(item_id)
             count = self._get_count(item)
             if not count and not self.verbose:

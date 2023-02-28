@@ -10,14 +10,15 @@ from utils.location import Location
 
 class Foodsi(Client):
 
-    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False):
+    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False, package_names: List[str] = []):
         self.msg_cache: Dict[str, int] = {}
         self.notifier = notifier
         self.verbose = verbose
         self.location = location
+        self.package_names = package_names
 
     @staticmethod
-    def _get_item_id(item: Dict):
+    def _get_id(item: Dict):
         return item.get('id')
 
     @staticmethod
@@ -63,5 +64,5 @@ class Foodsi(Client):
                 'user-agent':'okhttp/3.12.0'},
             data=json.dumps(reqs)
         )
-        return resp.json().get('data')
-
+        data = resp.json().get('data')
+        return [item for item in data if self._get_name(item) in self.package_names]

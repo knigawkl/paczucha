@@ -29,7 +29,7 @@ class TGTG(Client, TgtgClient):
             return []
 
     @staticmethod
-    def _get_item_id(item: Dict) -> str:
+    def _get_id(item: Dict) -> str:
         return item.get('item', {}).get('item_id')
 
     @staticmethod
