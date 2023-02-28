@@ -31,10 +31,15 @@ class Foodsi(Client):
     @staticmethod
     def _get_pickup_interval(item: Dict):
         iso_format = '%Y-%m-%dT%H:%M:%SZ'
+        for_day = item.get('for_day')
+        for_day = datetime.strptime(for_day, '%Y-%m-%d')
+        day = for_day.strftime('%d.%m')
+        raise Exception(day)
+
         collection_day = item.get('package_day', {}).get('collection_day', {})
         start, end = collection_day.get('opened_at'), collection_day.get('closed_at')
         start, end = datetime.strptime(start, iso_format), datetime.strptime(end, iso_format)
-        day = start.strftime('%d.%m')
+
         time_start = start.strftime('%H:%M')
         time_end = end.strftime('%H:%M')
         return f'{day} {time_start}-{time_end}'
