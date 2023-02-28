@@ -47,6 +47,7 @@ if __name__ == '__main__':
     schedule.every().minute.do(tgtg.scan)
     schedule.every().minute.do(foodsi.scan)
     schedule.every(20).minutes.do(dev_tgtg.scan)
+    schedule.every(20).minutes.do(dev_foodsi.scan)
 
     while True:
         schedule.run_pending()
