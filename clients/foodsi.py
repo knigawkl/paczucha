@@ -15,6 +15,25 @@ class Foodsi(Client):
         self.verbose = verbose
         self.location = location
 
+    @staticmethod
+    def _get_item_id(item: Dict):
+        return item.get('id')
+
+    @staticmethod
+    def _get_count(item: Dict):
+        return item.get('meals_amount', 0)
+
+    @staticmethod
+    def _get_name(item: Dict):
+        return item.get('name')
+
+    @staticmethod
+    def _get_pickup_interval(item: Dict):
+        start = item.get('collection_day', {}).get('opened_at')
+        end = item.get('collection_day', {}).get('closed_at')
+        raise Exception(start, end)
+        return
+
     def _get_item_reqs(self):
         return {
             "distance": {
@@ -35,7 +54,5 @@ class Foodsi(Client):
                 'user-agent':'okhttp/3.12.0'},
             data=json.dumps(reqs)
         )
-        return resp.json()
+        return resp.json().get('data')
 
-    def _process_items(self, items: List[Dict]):
-        print(items)

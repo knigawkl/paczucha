@@ -28,18 +28,21 @@ class TGTG(Client, TgtgClient):
         except Exception as e:
             return []
 
-    def _process_items(self, items: List[Dict]):
-        for item in items:
-            item_id = item.get('item', {}).get('item_id')
-            self._del_msg(item_id)
-            items_available = item.get('items_available')
-            if not items_available and not self.verbose:
-                continue
-            display_name = item.get('display_name').replace('&', 'i')
-            pickup_interval = self._format_pickup_interval(item.get('pickup_interval'))
-            msg = self._form_msg(display_name, items_available, pickup_interval)
-            msg_id = self.notifier.notify(msg)
-            self.msg_cache[item_id] = msg_id
+    @staticmethod
+    def _get_item_id(item: Dict) -> str:
+        return item.get('item', {}).get('item_id')
+
+    @staticmethod
+    def _get_count(item: Dict) -> int:
+        return item.get('items_available')
+
+    @staticmethod
+    def _get_name(item: Dict) -> str:
+        return item.get('display_name').replace('&', 'i')
+
+    @staticmethod
+    def _get_pickup_interval(item: Dict):
+        return TGTG._format_pickup_interval(item.get('pickup_interval'))
 
     @staticmethod
     def _format_pickup_interval(pickup_interval: Dict[str, str]):
