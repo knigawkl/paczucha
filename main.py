@@ -2,10 +2,13 @@ import schedule
 
 from notifiers.telegram import Telegram
 from clients.tgtg import TGTG
+from clients.foodsi import Foodsi
+from utils.location import Location
 from config import settings
 
 
 if __name__ == '__main__':
+    location = Location(**settings.location)
     tele = Telegram(
         token=settings.telegram_token,
         chat_id=settings.telegram.chat_id
@@ -26,6 +29,13 @@ if __name__ == '__main__':
         refresh_token=settings.tgtg.refresh_token,
         user_id=settings.tgtg.user_id,
         cookie=settings.tgtg.cookie,
+        notifier=dev_tele,
+        verbose=True
+    )
+    foodsi = Foodsi(
+        notifier=tele
+    )
+    dev_foodsi = Foodsi(
         notifier=dev_tele,
         verbose=True
     )

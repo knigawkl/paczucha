@@ -22,7 +22,7 @@ class TGTG(Client, TgtgClient):
         self.msg_cache: Dict[str, int] = {}
         self.verbose = verbose
 
-    def get_fav_items(self) -> List[Dict]:
+    def _get_items(self) -> List[Dict]:
         try:
             return self.tgtg.get_items(favorites_only=True)
         except Exception as e:
@@ -41,17 +41,6 @@ class TGTG(Client, TgtgClient):
             msg_id = self.notifier.notify(msg)
             self.msg_cache[item_id] = msg_id
 
-    def _del_msg(self, item_id):
-        if item_id in self.msg_cache:
-            self.notifier.delete(self.msg_cache.get(item_id))
-            self.msg_cache.pop(item_id)
-
-    @staticmethod
-    def _form_msg(display_name: str, items_available: int, pickup_interval: str):
-        return f'{display_name}\n' \
-               f'Available: {items_available}\n' \
-               f'Pickup time: {pickup_interval}'
-
     @staticmethod
     def _format_pickup_interval(pickup_interval: Dict[str, str]):
         iso_format = '%Y-%m-%dT%H:%M:%SZ'
@@ -62,7 +51,3 @@ class TGTG(Client, TgtgClient):
         time_start = start.strftime('%H:%M')
         time_end = end.strftime('%H:%M')
         return f'{day} {time_start}-{time_end}'
-
-    def scan(self):
-        items = self.get_fav_items()
-        self._process_items(items)

@@ -1,7 +1,11 @@
-from typing import Optional, List
+from typing import List, Dict
 
 from clients.client import Client
 
 class Foodsi(Client):
-    def scan(self, package_names: Optional[List[str]] = None):
+
+    def _get_items(self) -> List[Dict]:
+        pass
+
+    def _process_items(self, items: List[Dict]):
         pass

@@ -1,16 +1,17 @@
-"""Telegram client."""
+"""This module contains a class capable of interacting with Telegram's API."""
 import logging
 
 import requests
 
 
 class Telegram:
+    """Telegram client."""
     def __init__(self, token: str, chat_id: int) -> None:
-        """
+        """Instantiates a telegram client. No healthcheck is performed.
 
         Args:
-             token:
-             chat_id:
+             token: Each bot is given a unique authentication token when it is created.
+             chat_id: Unique identifier for the target chat. Example: 0.
 
         """
         self.chat_id = chat_id
