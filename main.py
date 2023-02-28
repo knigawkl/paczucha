@@ -34,15 +34,18 @@ if __name__ == '__main__':
     )
     foodsi = Foodsi(
         location=location,
-        notifier=tele
+        notifier=tele,
+        package_names=settings.package_names
     )
     dev_foodsi = Foodsi(
         location=location,
         notifier=dev_tele,
-        verbose=True
+        verbose=True,
+        package_names=['Sushi Fudżi', 'Circle K Conrada']
     )
 
     schedule.every().minute.do(tgtg.scan)
+    schedule.every().minute.do(foodsi.scan)
     schedule.every(20).minutes.do(dev_tgtg.scan)
 
     while True:
