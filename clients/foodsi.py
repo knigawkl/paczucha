@@ -35,7 +35,7 @@ class Foodsi(Client):
                 'user-agent':'okhttp/3.12.0'},
             data=json.dumps(reqs)
         )
-        return resp
+        return resp.json()
 
     def _process_items(self, items: List[Dict]):
         print(items)
