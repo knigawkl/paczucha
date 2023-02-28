@@ -29,8 +29,8 @@ class Foodsi(Client):
 
     @staticmethod
     def _get_pickup_interval(item: Dict):
-        start = item.get('collection_day', {}).get('opened_at')
-        end = item.get('collection_day', {}).get('closed_at')
+        collection_day = item.get('package_day', {}).get('collection_day', {})
+        start, end = collection_day.get('opened_at'), collection_day.get('closed_at')
         raise Exception(start, end)
         day = start.strftime('%d.%m')
         time_start = start.strftime('%H:%M')
