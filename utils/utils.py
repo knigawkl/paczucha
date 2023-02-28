@@ -1,3 +1,4 @@
+"""Utility functions."""
 from datetime import datetime
 from dateutil import tz
 
