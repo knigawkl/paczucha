@@ -32,7 +32,10 @@ class Foodsi(Client):
         start = item.get('collection_day', {}).get('opened_at')
         end = item.get('collection_day', {}).get('closed_at')
         raise Exception(start, end)
-        return
+        day = start.strftime('%d.%m')
+        time_start = start.strftime('%H:%M')
+        time_end = end.strftime('%H:%M')
+        return f'{day} {time_start}-{time_end}'
 
     def _get_item_reqs(self):
         return {
