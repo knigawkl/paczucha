@@ -15,7 +15,7 @@ class Client(ABC):
         self._del_msgs()
 
     def _del_msgs(self):
-        for item_id, msg_id in self.msg_cache:
+        for item_id, msg_id in self.msg_cache.items():
             self.notifier.delete(msg_id)
             self.msg_cache.pop(item_id)
 
