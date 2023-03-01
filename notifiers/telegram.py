@@ -48,6 +48,7 @@ class Telegram:
             logging.error(e)
 
     def _get_updates(self):
+        """Receive incoming updates using long polling."""
         url = f'{self.url}getUpdates'
         resp = requests.get(url)
         logging.info(resp.json())

@@ -12,8 +12,12 @@ class Client(ABC):
     verbose: bool = False
 
     def __del__(self):
-        for msg_id in self.msg_cache.values():
+        self._del_msgs()
+
+    def _del_msgs(self):
+        for item_id, msg_id in self.msg_cache:
             self.notifier.delete(msg_id)
+            self.msg_cache.pop(item_id)
 
     @abstractmethod
     def _get_items(self) -> List[Dict]:
@@ -42,7 +46,6 @@ class Client(ABC):
     def _process_items(self, items: List[Dict]):
         for item in items:
             item_id = self._get_id(item)
-            self._del_msg(item_id)
             count = self._get_count(item)
             if not count and not self.verbose:
                 continue
@@ -59,12 +62,7 @@ class Client(ABC):
                f'Pickup time: {pickup_interval}\n' \
                f'Source: {cls.__name__}'
 
-    def _del_msg(self, item_id):
-        if item_id in self.msg_cache:
-            msg_id = self.msg_cache.get(item_id)
-            self.notifier.delete(msg_id)
-            self.msg_cache.pop(item_id)
-
     def scan(self):
+        self._del_msgs()
         items = self._get_items()
         self._process_items(items)
