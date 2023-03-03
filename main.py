@@ -1,7 +1,7 @@
 import schedule
 
 from notifiers.telegram import Telegram
-from clients.tgtg import TGTG
+from clients.tgtg import TGTG, TGTGConfig
 from clients.foodsi import Foodsi
 from utils.location import Location
 from config import settings
@@ -17,18 +17,19 @@ if __name__ == '__main__':
         token=settings.telegram_token,
         chat_id=settings.telegram.dev_chat_id
     )
-    tgtg = TGTG(
+
+    tgtg_config = TGTGConfig(
         access_token=settings.tgtg.access_token,
         refresh_token=settings.tgtg.refresh_token,
         user_id=settings.tgtg.user_id,
-        cookie=settings.tgtg.cookie,
+        cookie=settings.tgtg.cookie
+    )
+    tgtg = TGTG(
+        config=tgtg_config,
         notifier=tele
     )
     dev_tgtg = TGTG(
-        access_token=settings.tgtg.access_token,
-        refresh_token=settings.tgtg.refresh_token,
-        user_id=settings.tgtg.user_id,
-        cookie=settings.tgtg.cookie,
+        config=tgtg_config,
         notifier=dev_tele,
         verbose=True
     )

@@ -9,9 +9,11 @@ from notifiers.telegram import Telegram
 from clients.client import Client
 from utils.location import Location
 
-class Foodsi(Client):
+class Foodsi(Client):  # pylint: disable=too-few-public-methods
+    """The foodsi.pl client."""
 
-    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False, package_names: List[str] = None):
+    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False,
+                 package_names: List[str] = None):
         self.notifier = notifier
         self.verbose = verbose
         self.location = location
@@ -34,7 +36,8 @@ class Foodsi(Client):
         extended_format = '%Y-%m-%dT%H:%M:%S.%fZ'
         collection_day = item.get('package_day', {}).get('collection_day', {})
         start, end = collection_day.get('opened_at'), collection_day.get('closed_at')
-        start, end = datetime.strptime(start, extended_format), datetime.strptime(end, extended_format)
+        start = datetime.strptime(start, extended_format)
+        end = datetime.strptime(end, extended_format)
 
         time_start = start.strftime('%H:%M')
         time_end = end.strftime('%H:%M')
@@ -58,7 +61,8 @@ class Foodsi(Client):
                 'Content-type':'application/json',
                 'system-version':'android_3.0.0',
                 'user-agent':'okhttp/3.12.0'},
-            data=json.dumps(reqs)
+            data=json.dumps(reqs),
+            timeout=Client.TIMEOUT
         )
         data = resp.json().get('data')
         return [item for item in data if self._get_name(item) in self.package_names]

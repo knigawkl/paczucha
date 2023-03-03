@@ -6,7 +6,9 @@ from notifiers.telegram import Telegram
 
 
 class Client(ABC):
+    """Base class for all clients."""
 
+    TIMEOUT = 5
     msg_ids: List[int] = []
     notifier: Telegram
     verbose: bool = False
@@ -15,7 +17,7 @@ class Client(ABC):
         self._del_msgs()
 
     def _del_msgs(self):
-        """Delete sent notifications and clear the message cache."""
+        """Delete sent notifications."""
         for msg_id in self.msg_ids:
             self.notifier.delete(msg_id)
         self.msg_ids = []
@@ -48,7 +50,8 @@ class Client(ABC):
             pickup_interval = self._get_pickup_interval(item)
             msg = self._form_msg(name, count, pickup_interval)
             msg_id = self.notifier.notify(msg)
-            self.msg_ids.append(msg_id)
+            if msg_id:
+                self.msg_ids.append(msg_id)
 
     @classmethod
     def _form_msg(cls, display_name: str, items_available: int, pickup_interval: str):
@@ -58,6 +61,7 @@ class Client(ABC):
                f'Source: {cls.__name__}'
 
     def scan(self):
+        """Look for items of interest."""
         self._del_msgs()
         items = self._get_items()
         self._process_items(items)

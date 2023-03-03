@@ -1,5 +1,7 @@
+"""This module contains the TooGoodToGo client."""
 from typing import List, Dict
 from datetime import datetime
+from dataclasses import dataclass
 
 from tgtg import TgtgClient
 
@@ -8,24 +10,30 @@ from notifiers.telegram import Telegram
 from utils.utils import shift_timezone
 
 
-class TGTG(Client, TgtgClient):
+@dataclass
+class TGTGConfig:
+    """Represents TGTG client configuration."""
+    access_token: str
+    refresh_token: str
+    user_id: str
+    cookie: str
 
-    def __init__(self, access_token: str, refresh_token: str, user_id: str, cookie: str, notifier: Telegram,
-                 verbose: bool = False):
-        self.tgtg = TgtgClient(
-            access_token=access_token,
-            refresh_token=refresh_token,
-            user_id=user_id,
-            cookie=cookie
+
+class TGTG(Client, TgtgClient):
+    """The TooGoodToGo client."""
+
+    def __init__(self, config: TGTGConfig, notifier: Telegram, verbose: bool = False):
+        super().__init__(
+            access_token=config.access_token,
+            refresh_token=config.refresh_token,
+            user_id=config.user_id,
+            cookie=config.cookie
         )
         self.notifier = notifier
         self.verbose = verbose
 
     def _get_items(self) -> List[Dict]:
-        try:
-            return self.tgtg.get_items(favorites_only=True)
-        except Exception as e:
-            return []
+        return self.get_items(favorites_only=True)
 
     @staticmethod
     def _get_id(item: Dict) -> str:

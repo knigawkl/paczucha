@@ -1,11 +1,14 @@
 """This module contains a class capable of interacting with Telegram's API."""
 import logging
+from typing import Optional
 
 import requests
 
 
 class Telegram:
     """Telegram client."""
+    TIMEOUT = 5
+
     def __init__(self, token: str, chat_id: int) -> None:
         """Instantiates a telegram client. No healthcheck is performed.
 
@@ -17,7 +20,7 @@ class Telegram:
         self.chat_id = chat_id
         self.url = f"https://api.telegram.org/bot{token}/"
 
-    def notify(self, msg: str) -> int:
+    def notify(self, msg: str) -> Optional[int]:
         """Notify via Telegram.
 
         Args:
@@ -29,10 +32,11 @@ class Telegram:
         """
         url = f'{self.url}sendMessage?chat_id={self.chat_id}%parse_mode=html&text={msg}'
         try:
-            resp = requests.post(url).json()
-            return resp['result']['message_id']
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+            resp = requests.post(url, timeout=Telegram.TIMEOUT).json()
+            return resp.get('result', {}).get('message_id')
+        except requests.exceptions.RequestException as exception:
+            logging.error(exception)
+            return None
 
     def delete(self, msg_id: int) -> None:
         """Delete a Telegram message.
@@ -43,12 +47,12 @@ class Telegram:
         """
         url = f'{self.url}deleteMessage?chat_id={self.chat_id}&message_id={msg_id}'
         try:
-            requests.post(url)
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+            requests.post(url, timeout=Telegram.TIMEOUT)
+        except requests.exceptions.RequestException as exception:
+            logging.error(exception)
 
     def _get_updates(self):
         """Receive incoming updates using long polling."""
         url = f'{self.url}getUpdates'
-        resp = requests.get(url)
+        resp = requests.get(url, timeout=Telegram.TIMEOUT)
         logging.info(resp.json())
