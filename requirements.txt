@@ -3,3 +3,4 @@ tgtg>=0.14.0
 schedule>=1.1.0
 requests>=2.28.2
 python-dateutil
+pytest

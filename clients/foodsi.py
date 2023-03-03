@@ -11,16 +11,11 @@ from utils.location import Location
 
 class Foodsi(Client):
 
-    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False, package_names: List[str] = []):
-        self.msg_cache: Dict[str, int] = {}
+    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False, package_names: List[str] = None):
         self.notifier = notifier
         self.verbose = verbose
         self.location = location
         self.package_names = package_names
-
-    @staticmethod
-    def _get_id(item: Dict):
-        return item.get('id')
 
     @staticmethod
     def _get_count(item: Dict):

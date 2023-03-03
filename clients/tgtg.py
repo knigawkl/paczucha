@@ -18,7 +18,6 @@ class TGTG(Client, TgtgClient):
             user_id=user_id,
             cookie=cookie
         )
-        self.msg_cache: Dict[str, int] = {}
         self.notifier = notifier
         self.verbose = verbose
 
