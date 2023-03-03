@@ -1,3 +1,4 @@
+"""This module contains the Foodsi class."""
 import json
 from typing import List, Dict
 from datetime import datetime
