@@ -8,3 +8,10 @@
 🎛️  settings.toml was created to hold your settings.
 
 🔑 .secrets.toml was created to hold your secrets.
+
+
+### TODO
+
+* unit and integration tests,
+
+* ability to select config file (add as a cli arg).
