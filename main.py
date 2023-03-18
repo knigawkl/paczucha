@@ -44,7 +44,7 @@ if __name__ == '__main__':
         verbose=True,
         package_names=['Sushi Fudżi', 'Circle K Conrada']
     )
-    tgtg.scan()
+
     schedule.every().minute.do(tgtg.scan)
     schedule.every().minute.do(foodsi.scan)
     schedule.every(10).minutes.do(dev_tgtg.scan)
