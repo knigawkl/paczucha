@@ -1,3 +1,4 @@
+"""Cron version."""
 from notifiers.telegram import Telegram
 from clients.tgtg import TGTG, TGTGConfig
 from clients.foodsi import Foodsi
