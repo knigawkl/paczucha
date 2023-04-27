@@ -1,3 +1,5 @@
+import schedule
+
 from notifiers.telegram import Telegram
 from clients.tgtg import TGTG, TGTGConfig
 from clients.foodsi import Foodsi
@@ -43,6 +45,10 @@ if __name__ == '__main__':
         package_names=['Sushi Fudżi', 'Circle K Conrada']
     )
 
-    tgtg.scan()
-    foodsi.scan()
+    schedule.every().minute.do(tgtg.scan)
+    schedule.every().minute.do(foodsi.scan)
+    schedule.every(10).minutes.do(dev_tgtg.scan)
+    schedule.every(10).minutes.do(dev_foodsi.scan)
 
+    while True:
+        schedule.run_pending()
