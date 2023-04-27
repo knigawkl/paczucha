@@ -12,11 +12,6 @@ if __name__ == '__main__':
         token=settings.telegram_token,
         chat_id=settings.telegram.chat_id
     )
-    dev_tele = Telegram(
-        token=settings.telegram_token,
-        chat_id=settings.telegram.dev_chat_id
-    )
-
     tgtg_config = TGTGConfig(
         access_token=settings.tgtg.access_token,
         refresh_token=settings.tgtg.refresh_token,
@@ -27,23 +22,11 @@ if __name__ == '__main__':
         config=tgtg_config,
         notifier=tele
     )
-    dev_tgtg = TGTG(
-        config=tgtg_config,
-        notifier=dev_tele,
-        verbose=True
-    )
     foodsi = Foodsi(
         location=location,
         notifier=tele,
         package_names=settings.package_names
     )
-    dev_foodsi = Foodsi(
-        location=location,
-        notifier=dev_tele,
-        verbose=True,
-        package_names=['Sushi Fudżi', 'Circle K Conrada']
-    )
 
     tgtg.scan()
     foodsi.scan()
-
