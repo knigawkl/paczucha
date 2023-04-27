@@ -30,8 +30,11 @@ class Foodsi(Client):  # pylint: disable=too-few-public-methods
     @staticmethod
     def _get_pickup_interval(item: Dict):
         for_day = item.get('for_day')
-        for_day = datetime.strptime(for_day, '%Y-%m-%d')
-        day = for_day.strftime('%d.%m')
+        if for_day:
+            for_day = datetime.strptime(for_day, '%Y-%m-%d')
+            day = for_day.strftime('%d.%m')
+        else:
+            day = 'Failed to fetch'
 
         extended_format = '%Y-%m-%dT%H:%M:%S.%fZ'
         collection_day = item.get('package_day', {}).get('collection_day', {})
