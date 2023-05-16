@@ -10,7 +10,7 @@ from notifiers.telegram import Telegram
 class Client(ABC):
     """Base class for all clients."""
     TIMEOUT = 5
-    MSG_LIST_KEY = 'msg_ids'
+    MSG_LIST_KEY = 'telegram_msg_ids'
     notifier: Telegram
     verbose: bool = False
 
