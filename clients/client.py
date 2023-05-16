@@ -2,25 +2,31 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict
 
+import redis
+
 from notifiers.telegram import Telegram
 
 
 class Client(ABC):
     """Base class for all clients."""
-
     TIMEOUT = 5
-    msg_ids: List[int] = []
+    MSG_LIST_KEY = 'msg_ids'
     notifier: Telegram
     verbose: bool = False
+
+    def __new__(cls):
+        obj = super().__new__(cls)
+        obj.redis = redis.Redis(host='localhost', port=6379, db=0)
+        return obj
 
     def __del__(self):
         self._del_msgs()
 
     def _del_msgs(self):
         """Delete sent notifications."""
-        for msg_id in self.msg_ids:
+        for msg_id in self.redis.lrange(self.MSG_LIST_KEY, 0, -1):
             self.notifier.delete(msg_id)
-        self.msg_ids = []
+        self.redis.delete(self.MSG_LIST_KEY)
 
     @abstractmethod
     def _get_items(self) -> List[Dict]:
@@ -51,7 +57,7 @@ class Client(ABC):
             msg = self._form_msg(name, count, pickup_interval)
             msg_id = self.notifier.notify(msg)
             if msg_id:
-                self.msg_ids.append(msg_id)
+                self.redis.rpush(self.MSG_LIST_KEY, msg_id)
 
     @classmethod
     def _form_msg(cls, display_name: str, items_available: int, pickup_interval: str):

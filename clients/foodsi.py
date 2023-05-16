@@ -12,8 +12,7 @@ from utils.location import Location
 class Foodsi(Client):  # pylint: disable=too-few-public-methods
     """The foodsi.pl client."""
 
-    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False,
-                 package_names: List[str] = None):
+    def __init__(self, location: Location, notifier: Telegram, verbose: bool = False, package_names: List[str] = None):
         self.notifier = notifier
         self.verbose = verbose
         self.location = location
