@@ -20,7 +20,7 @@ class Telegram:
         self.chat_id = chat_id
         self.url = f"https://api.telegram.org/bot{token}/"
 
-    def notify(self, msg: str) -> Optional[int]:
+    def notify(self, msg: str) -> Optional[str]:
         """Notify via Telegram.
 
         Args:
@@ -33,7 +33,7 @@ class Telegram:
         url = f'{self.url}sendMessage?chat_id={self.chat_id}%parse_mode=html&text={msg}'
         try:
             resp = requests.post(url, timeout=Telegram.TIMEOUT).json()
-            return resp.get('result', {}).get('message_id')
+            return str(resp.get('result', {}).get('message_id'))
         except requests.exceptions.RequestException as exception:
             logging.error(exception)
             return None
