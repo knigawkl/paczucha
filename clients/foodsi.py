@@ -21,7 +21,7 @@ class Foodsi(Client):  # pylint: disable=too-few-public-methods
 
     @staticmethod
     def _get_count(item: Dict):
-        return item.get('meals_left', '?')
+        return item.get('package_day', {}).get('meals_left', '?')
 
     @staticmethod
     def _get_name(item: Dict):
