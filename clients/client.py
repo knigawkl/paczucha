@@ -19,15 +19,12 @@ class Client(ABC):
         obj.redis = redis.Redis(host='localhost', port=6379, db=0)
         return obj
 
-    def __del__(self):
-        self._del_msgs()
-
     def _del_msgs(self):
         """Delete sent notifications."""
         msg_ids = self.redis.lrange(self.MSG_LIST_KEY, 0, -1)
         for msg_id in msg_ids:
-            print(msg_id)
-            self.notifier.delete(msg_id)
+            print(msg_id.decode('utf-8'))
+            self.notifier.delete(msg_id.decode('utf-8'))
         self.redis.delete(self.MSG_LIST_KEY)
 
     @abstractmethod
