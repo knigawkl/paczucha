@@ -23,7 +23,6 @@ class Client(ABC):
         """Delete sent notifications."""
         msg_ids = self.redis.lrange(self.MSG_LIST_KEY, 0, -1)
         for msg_id in msg_ids:
-            print(msg_id.decode('utf-8'))
             self.notifier.delete(msg_id.decode('utf-8'))
         self.redis.delete(self.MSG_LIST_KEY)
 
