@@ -14,7 +14,7 @@ class Client(ABC):
     notifier: Telegram
     verbose: bool = False
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwargs):
         obj = super().__new__(cls)
         obj.redis = redis.Redis(host='localhost', port=6379, db=0)
         return obj
