@@ -1,6 +1,6 @@
 """This module contains the Foodsi class."""
 import json
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from datetime import datetime
 
 import requests
@@ -21,30 +21,43 @@ class Foodsi(Client):  # pylint: disable=too-few-public-methods
 
     @staticmethod
     def _get_count(item: Dict):
-        return item.get('meals_amount', 0)
+        return item.get('meals_left', '?')
 
     @staticmethod
     def _get_name(item: Dict):
         return item.get('name')
 
-    @staticmethod
-    def _get_pickup_interval(item: Dict):
-        for_day = item.get('for_day')
-        if for_day:
-            for_day = datetime.strptime(for_day, '%Y-%m-%d')
-            day = for_day.strftime('%d.%m')
-        else:
-            day = 'Failed to fetch'
-
-        extended_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+    def _get_pickup_interval(self, item: Dict):
         collection_day = item.get('package_day', {}).get('collection_day', {})
+        weekday = self._get_weekday(collection_day)
+        time_start, time_end = self._get_timeframe(collection_day)
+
+        return f'{weekday} {time_start}-{time_end}'
+
+    @staticmethod
+    def _get_weekday(collection_day: Dict) -> str:
+        weekday_int = collection_day.get('week_day', 8)
+        weekday_mapping = {
+            1: 'Monday',
+            2: 'Tuesday',
+            3: 'Wednesday',
+            4: 'Thursday',
+            5: 'Friday',
+            6: 'Saturday',
+            7: 'Sunday',
+            8: ''
+        }
+        return weekday_mapping.get(weekday_int)
+
+    @staticmethod
+    def _get_timeframe(collection_day: Dict) -> Tuple[str, str]:
+        extended_format = '%Y-%m-%dT%H:%M:%S.%fZ'
         start, end = collection_day.get('opened_at'), collection_day.get('closed_at')
         start = datetime.strptime(start, extended_format)
         end = datetime.strptime(end, extended_format)
-
         time_start = start.strftime('%H:%M')
         time_end = end.strftime('%H:%M')
-        return f'{day} {time_start}-{time_end}'
+        return time_start, time_end
 
     def _get_item_reqs(self):
         return {

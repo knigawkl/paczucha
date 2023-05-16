@@ -1,0 +1,20 @@
+{'id': 1190055, 'address': 'Reymonta 15, Warszawa', 'address_notes': '', 'distance': '0.5',
+  'image': {'url': 'https://foodsi-backend-production.s3.amazonaws.com/uploads/package/image/2583/4dd1e6a528.jpg'},
+  'important_notes': '', 'latitude': '52.2748247',
+  'logo': {'url': 'https://foodsi-backend-production.s3.amazonaws.com/uploads/venue/logo/1786/e1f495796e.jpeg'}, 'longitude': '20.9372399',
+  'meal': {'description': '🍱🍣 Różne zestawy sushi oraz inne produkty z menu tj. sałatka czy zupa', 'original_price': '60.0', 'price': '25.99'},
+  'name': 'Sushi Fudżi', 'package_day': {'availability_label': '5+ PACZEK', 'availability_label_number': 3, 'isNew': False,
+  'collection_day': {'id': 1190055, 'week_day': 2, 'schedule_id': 1, 'active': True,
+    'closed_at': '2000-01-01T21:45:00.000Z', 'opened_at': '2000-01-01T17:00:00.000Z'}, 'meals_left': 7, 'soldOut': None},
+  'package_id': 2583, 'package_type': 'duża paczka', 'phone': '', 'url': 'https://www.sushifudzi.pl/',
+  'what_you_need_to_know': '🛍 Produkty będą zapakowane, ale weź ze sobą torbę! Na miejscu są one dodatkowo płatne. '}
+
+{'id': 1188176, 'address': 'Aleja Zjednoczenia 21, Warszawa', 'address_notes': '', 'distance': '0.9',
+  'image': {'url': 'https://foodsi-backend-production.s3.amazonaws.com/uploads/package/image/5457/4208608f32.jpg'},
+  'important_notes': '', 'latitude': '52.28114435', 'logo': {'url': 'https://foodsi-backend-production.s3.amazonaws.com/uploads/venue/logo/3208/01e1993e95.jpg'},
+  'longitude': '20.94978413434123', 'meal':
+{'description': '🥪🥐🍰 Cofix to dobra kawa i świeże jedzenie. Możesz tu uratować kanapki, croissanty, sałatki, desery, ciastka, a nawet kawę. Przyjdź i zobacz co dostaniesz dzisiaj!',
+  'original_price': '36.0', 'price': '18.0'}, 'name': 'Cofix Al. Zjednoczenia',
+  'package_day': {'availability_label': '2 PACZEK', 'availability_label_number': 2, 'isNew': False,
+    'collection_day': {'id': 1188176, 'week_day': 2, 'schedule_id': 1, 'active': True, 'closed_at': '2000-01-01T20:00:00.000Z', 'opened_at': '2000-01-01T18:40:00.000Z'},
+    'meals_left': 2, 'soldOut': None}, 'package_id': 5457, 'package_type': 'paczka niespodzianka', 'phone': '', 'url': ' https://www.facebook.com/cofixpolska/', 'what_you_need_to_know': ''}
