@@ -30,5 +30,5 @@ if __name__ == '__main__':
         package_names=['Sushi Fudżi', 'Circle K Conrada']
     )
 
-    # dev_tgtg.scan()
+    dev_tgtg.scan()
     dev_foodsi.scan()

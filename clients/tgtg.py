@@ -54,7 +54,7 @@ class TGTG(Client, TgtgClient):
     @staticmethod
     def _format_pickup_interval(pickup_interval: Dict[str, str]):
         if not pickup_interval:
-            return 'Could not parse pickup time.'
+            return '?'
         iso_format = '%Y-%m-%dT%H:%M:%SZ'
         start, end = pickup_interval.get('start'), pickup_interval.get('end')
         start, end = datetime.strptime(start, iso_format), datetime.strptime(end, iso_format)

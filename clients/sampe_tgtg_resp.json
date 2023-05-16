@@ -1,154 +1,26 @@
-{
-    "item": {
-        "item_id": "470497",
-        "sales_taxes": [
-            {
-                "tax_description": "VAT",
-                "tax_percentage": 23.0
-            }
-        ],
-        "tax_amount": {
-            "code": "PLN",
-            "minor_units": 224,
-            "decimals": 2
-        },
-        "price_excluding_taxes": {
-            "code": "PLN",
-            "minor_units": 975,
-            "decimals": 2
-        },
-        "price_including_taxes": {
-            "code": "PLN",
-            "minor_units": 1199,
-            "decimals": 2
-        },
-        "value_excluding_taxes": {
-            "code": "PLN",
-            "minor_units": 2927,
-            "decimals": 2
-        },
-        "value_including_taxes": {
-            "code": "PLN",
-            "minor_units": 3600,
-            "decimals": 2
-        },
-        "taxation_policy": "PRICE_INCLUDES_TAXES",
-        "show_sales_taxes": false,
-        "cover_picture": {
-            "picture_id": "472751",
-            "current_url": "https://images.tgtg.ninja/item/cover/9f32d755-af46-40b4-b2a1-75c8a911865a.jpg",
-            "is_automatically_created": false
-        },
-        "logo_picture": {
-            "picture_id": "464839",
-            "current_url": "https://images.tgtg.ninja/itembulkimport/logo/9172/411772b9-bc6a-4158-829a-39f1b1c9bb02.png",
-            "is_automatically_created": false
-        },
-        "name": "Paczka Warzywa & Owoce - Rano",
-        "description": "\ud83c\udf81W paczkach uratujesz pyszne owoce i warzywa",
-        "food_handling_instructions": "",
-        "can_user_supply_packaging": false,
-        "packaging_option": "BAG_ALLOWED",
-        "collection_info": "",
-        "diet_categories": [
-            "VEGETARIAN"
-        ],
-        "item_category": "GROCERIES",
-        "buffet": false,
-        "badges": [
-            {
-                "badge_type": "SERVICE_RATING_SCORE",
-                "rating_group": "LOVED",
-                "percentage": 90,
-                "user_count": 428,
-                "month_count": 6
-            },
-            {
-                "badge_type": "OVERALL_RATING_TRUST_SCORE",
-                "rating_group": "LOVED",
-                "percentage": 86,
-                "user_count": 428,
-                "month_count": 6
-            }
-        ],
-        "positive_rating_reasons": [
-            "POSITIVE_FEEDBACK_GREAT_QUANTITY",
-            "POSITIVE_FEEDBACK_FRIENDLY_STAFF",
-            "POSITIVE_FEEDBACK_QUICK_COLLECTION",
-            "POSITIVE_FEEDBACK_GREAT_VARIETY",
-            "POSITIVE_FEEDBACK_GREAT_VALUE",
-            "POSITIVE_FEEDBACK_DELICIOUS_FOOD"
-        ],
-        "average_overall_rating": {
-            "average_overall_rating": 4.472295514511873,
-            "rating_count": 379,
-            "month_count": 6
-        },
-        "favorite_count": 0
-    },
-    "store": {
-        "store_id": "494144",
-        "store_name": "Biedronka ",
-        "branch": "Warszawa Nocznickiego 29",
-        "description": "",
-        "tax_identifier": "PL7791011327",
-        "website": "https://www.biedronka.pl/",
-        "store_location": {
-            "address": {
-                "country": {
-                    "iso_code": "PL",
-                    "name": "Poland"
-                },
-                "address_line": "Nocznickiego 29, 01-918 Warszawa, Poland",
-                "city": "",
-                "postal_code": ""
-            },
-            "location": {
-                "longitude": 20.9249113,
-                "latitude": 52.2850118
-            }
-        },
-        "logo_picture": {
-            "picture_id": "466113",
-            "current_url": "https://images.tgtg.ninja/storebulkimport/logo/9170/3352d81f-2403-4a36-a027-d34412940b34.png",
-            "is_automatically_created": false
-        },
-        "store_time_zone": "Europe/Warsaw",
-        "hidden": false,
-        "favorite_count": 0,
-        "we_care": false,
-        "distance": 6132.721011872969,
-        "cover_picture": {
-            "picture_id": "472751",
-            "current_url": "https://images.tgtg.ninja/item/cover/9f32d755-af46-40b4-b2a1-75c8a911865a.jpg",
-            "is_automatically_created": false
-        },
-        "is_manufacturer": false
-    },
-    "display_name": "Biedronka  - Warszawa Nocznickiego 29 (Paczka Warzywa & Owoce - Rano)",    "pickup_interval": {
-        "start": "2023-03-02T08:00:00Z",
-        "end": "2023-03-02T12:30:00Z"
-    },
-    "pickup_location": {
-        "address": {
-            "country": {
-                "iso_code": "PL",
-                "name": "Poland"
-            },
-            "address_line": "Nocznickiego 29, 01-918 Warszawa, Poland",
-            "city": "",
-            "postal_code": ""
-        },
-        "location": {
-            "longitude": 20.9249113,
-            "latitude": 52.2850118
-        }
-    },
-    "purchase_end": "2023-03-02T12:30:00Z",
-    "items_available": 10,
-    "distance": 6132.721011872969,
-    "favorite": true,
-    "in_sales_window": true,
-    "new_item": false,
-    "item_type": "MAGIC_BAG"
-}
+{'item': {'item_id': '1108298', 'sales_taxes': [{'tax_description': 'Podatek', 'tax_percentage': 5.0}],
+    'tax_amount': {'code': 'PLN', 'minor_units': 57, 'decimals': 2}, 'price_excluding_taxes': {'code': 'PLN', 'minor_units': 1142, 'decimals': 2},
+    'price_including_taxes': {'code': 'PLN', 'minor_units': 1199, 'decimals': 2}, 'value_excluding_taxes': {'code': 'PLN', 'minor_units': 3429, 'decimals': 2},
+    'value_including_taxes': {'code': 'PLN', 'minor_units': 3600, 'decimals': 2}, 'taxation_policy': 'PRICE_INCLUDES_TAXES', 'show_sales_taxes': False,
+    'cover_picture': {'picture_id': '1002442', 'current_url': 'https://images.tgtg.ninja/itembulkimport/cover/133340/5e3f3910-b928-4573-9d5a-1e90175c7856.jpg',
+        'is_automatically_created': False}, 'logo_picture':
+    {'picture_id': '1002441', 'current_url': 'https://images.tgtg.ninja/itembulkimport/logo/133340/39269842-3243-4cb7-b34d-2749c445aba7.png', 'is_automatically_created': False},
+    'name': 'Paczka Mix',
+    'description': '🎁W paczkach mieszanych uratujesz pyszne produkty spożywcze, których data ważności dobiega końca, na przykład: warzywa, owoce, nabiał, pieczywo, paczkowane wędliny',
+    'can_user_supply_packaging': False, 'packaging_option': 'MUST_BRING_BAG',
+    'collection_info': '🌱Paczkę odbierzesz przy kasie.\n 👉Przy odbiorze paczki potwierdź odbiór przesuwając suwak w aplikacji. \n❌Sklep nie akceptuje zrzutów ekranu.',
+    'diet_categories': [], 'item_category': 'GROCERIES', 'buffet': False, 'badges': [{'badge_type': 'OVERALL_RATING_TRUST_SCORE',
+        'rating_group': 'LOVED', 'percentage': 91, 'user_count': 209, 'month_count': 0}, {'badge_type': 'SERVICE_RATING_SCORE', 'rating_group': 'LOVED', 'percentage': 94,
+        'user_count': 209, 'month_count': 0}], 'positive_rating_reasons': ['POSITIVE_FEEDBACK_FRIENDLY_STAFF', 'POSITIVE_FEEDBACK_QUICK_COLLECTION',
+        'POSITIVE_FEEDBACK_GREAT_QUANTITY', 'POSITIVE_FEEDBACK_GREAT_VALUE', 'POSITIVE_FEEDBACK_DELICIOUS_FOOD', 'POSITIVE_FEEDBACK_GREAT_VARIETY'],
+    'average_overall_rating': {'average_overall_rating': 4.617224880382775, 'rating_count': 209, 'month_count': 1}, 'favorite_count': 0},
+    'store': {'store_id': '995171', 'store_name': 'Biedronka', 'branch': 'Brzeska 27', 'description': '', 'tax_identifier': 'PL7791011327',
+        'website': '', 'store_location': {'address': {'country': {'iso_code': 'PL', 'name': 'Poland'}, 'address_line': 'Brzeska 27, 21-500 Biała Podlaska, Polska',
+            'city': '', 'postal_code': ''}, 'location': {'longitude': 23.1234607, 'latitude': 52.0339618}},
+        'logo_picture': {'picture_id': '1002270', 'current_url': 'https://images.tgtg.ninja/storebulkimport/logo/132471/8ebcb3ff-ace7-4a0d-8707-cc224ec84257.png',
+            'is_automatically_created': False}, 'store_time_zone': 'Europe/Warsaw', 'hidden': False, 'favorite_count': 0, 'we_care': False,
+        'distance': 6176.243790604085, 'cover_picture': {'picture_id': '1002442',
+            'current_url': 'https://images.tgtg.ninja/itembulkimport/cover/133340/5e3f3910-b928-4573-9d5a-1e90175c7856.jpg', 'is_automatically_created': False},
+        'is_manufacturer': False}, 'display_name': 'Biedronka - Brzeska 27 (Paczka Mix)', 'pickup_location': {'address': {'country': {'iso_code': 'PL', 'name': 'Poland'},
+    'address_line': 'Brzeska 27, 21-500 Biała Podlaska, Polska', 'city': '', 'postal_code': ''}, 'location': {'longitude': 23.1234607, 'latitude': 52.0339618}},
+    'items_available': 0, 'distance': 6176.243790604085, 'favorite': True, 'in_sales_window': False, 'new_item': True, 'item_type': 'MAGIC_BAG'}
